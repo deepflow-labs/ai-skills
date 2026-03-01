@@ -1,0 +1,18 @@
+{
+  "name": "deepflow-labs-tools",
+  "owner": {
+    "name": "DeepFlow Labs Team"
+  },
+  "metadata": {
+    "description": "DeepFlow Labs team plugin marketplace. Install the deepflow-labs-tools plugin to get team workflows and MCP servers available across all DeepFlow Labs repositories."
+  },
+  "plugins": [
+    {
+      "name": "deepflow-labs-tools",
+      "source": "./",
+      "description": "DeepFlow Labs team operational skills and MCP servers (Linear, Clerk, Convex, Vercel, Playwright).",
+      "category": "productivity",
+      "tags": ["deepflow-labs", "linear", "convex", "vercel"]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "deepflow-labs-tools",
+  "description": "DeepFlow Labs team operational skills and MCP servers (Linear, Clerk, Convex, Vercel, Playwright). Install this plugin to get team workflows available across all DeepFlow Labs repositories.",
+  "version": "1.0.0",
+  "author": {
+    "name": "DeepFlow Labs Team"
+  },
+  "repository": "https://github.com/deepflow-labs/ai-skills",
+  "keywords": ["deepflow-labs", "linear", "skill-review", "convex", "vercel"]
+}
