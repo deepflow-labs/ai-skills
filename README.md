@@ -20,16 +20,36 @@ Run the setup script once and get **everything** you need for Claude Code across
 
 ## Table of Contents
 
+- [Why This Exists](#-why-this-exists)
 - [Quick Setup](#-quick-setup)
 - [What You Get](#-what-you-get)
+- [Roadmap — Skills We're Building](#-roadmap--skills-were-building)
 - [Using Skills Effectively](#-using-skills-effectively)
 - [MCP Servers](#-mcp-servers)
 - [How It Works Across Repos](#-how-it-works-across-repos)
+- [Contributing](#-contributing)
 - [Creating & Updating Skills](#-creating--updating-skills)
 - [Testing Locally](#-testing-locally)
 - [Versioning & Updates](#-versioning--updates)
 - [Plugin Structure](#-plugin-structure)
 - [Troubleshooting](#-troubleshooting)
+
+---
+
+## 🧭 Why This Exists
+
+We all do the same operational tasks repeatedly — writing PRDs, filing bugs in Linear, creating GitHub issues, reviewing PRs, scaffolding features. Each person does them slightly differently, and the quality varies.
+
+This repo fixes that by turning those repeatable processes into **shared, versioned skills** that Claude Code executes consistently. Think of it as **runbooks for AI** — instead of a wiki page describing how to write a good bug report, we encode that process as a skill that Claude follows step by step, every time.
+
+**The goals are simple:**
+
+1. **Standardize** — Everyone follows the same process for creating bugs, PRDs, epics, and other operational artifacts
+2. **Elevate quality** — Skills enforce structure, required fields, and review steps that are easy to skip manually
+3. **Save time** — Instead of context-switching to Linear/GitHub and filling out templates, describe what you need and let Claude handle the formatting and creation
+4. **Share knowledge** — When someone figures out a better workflow, they encode it as a skill and the whole team benefits
+
+**The rule of thumb:** if you find yourself doing something repeatable in Linear, GitHub, or any other tool — it should probably be a skill in this repo.
 
 ---
 
@@ -136,6 +156,25 @@ Everything is installed at **user scope** — it works in every repo, no per-rep
 | **Convex** | Query and mutate your Convex backend, inspect tables, run functions |
 | **Vercel** | Manage deployments, check build status, configure domains, view logs |
 | **Playwright** | Automate browser interactions — navigate pages, click elements, fill forms, take screenshots |
+
+---
+
+## 🗺️ Roadmap — Skills We're Building
+
+These are the skills we plan to build. If you have ideas for others, open an issue or comment on existing ones.
+
+| Skill | Status | What it will do |
+|-------|--------|----------------|
+| `review-skill` | **Available** | Reviews Claude Code skills against 17 quality criteria |
+| `create-bug` | Planned | Interview you about a bug, then create a well-structured Linear issue with repro steps, expected vs actual behavior, and severity |
+| `create-prd` | Planned | Walk you through writing a PRD with problem statement, requirements, success metrics, and scope |
+| `create-epic` | Planned | Break down a large initiative into a Linear project with milestones and sub-issues |
+| `create-design-doc` | Planned | Guide you through an architecture/design document with trade-offs, alternatives, and decision records |
+| `create-issue` | Planned | Create well-structured GitHub issues with technical context from the codebase |
+| `triage-bugs` | Planned | Review untriaged bugs in Linear and help prioritize them |
+| `sprint-review` | Planned | Summarize what was completed in the current cycle and generate a sprint review report |
+
+**Have an idea?** If you find yourself doing something repetitive in Linear, GitHub, Slack, or anywhere else — that's a candidate for a skill. Just build it and open a PR.
 
 ---
 
@@ -272,6 +311,29 @@ That's it. **No `enabledPlugins` list needed.** The `extraKnownMarketplaces` poi
 | MCP servers (Linear, Clerk, Convex, Vercel, Playwright) | Plugin's `.mcp.json` (this repo) |
 | Official plugins (code review, PR toolkit, commit commands, etc.) | Setup script installs at user scope |
 | Repo-specific permissions (safe git commands, denied destructive ops) | Each repo's `.claude/settings.json` |
+
+---
+
+## 🤝 Contributing
+
+Spot a repeatable process? Build the skill and open a PR. No formal proposal needed — we're a small team, so move fast.
+
+### How to add a skill
+
+1. Clone this repo and run `claude --plugin-dir ./`
+2. **Use `/skill-creator` to build the skill** — don't write SKILL.md files from scratch. The skill-creator is itself a skill that guides you through the entire process: it generates proper frontmatter, sequential steps, examples, error handling, and edge cases. It also knows about the MCP servers we have available (Linear, Clerk, Convex, Vercel, Playwright), so the skills it produces are wired into our existing stack from the start.
+3. Test it locally, review it with `/deepflow-labs-tools:review-skill`
+4. Open a PR
+
+> **There's a skill for creating skills.** This is intentional — it ensures every skill follows the same structure, uses the right MCP integrations, and meets quality standards before it ever hits a PR. Don't hand-write SKILL.md files.
+
+### What makes a good skill candidate?
+
+- You do it **more than twice a week**
+- It follows a **predictable structure** (e.g., bug reports always need repro steps)
+- It involves **copy-pasting between tools** (e.g., Linear template + GitHub context)
+- The **quality varies** depending on who does it or how rushed they are
+- It's **tedious but important** (e.g., writing thorough PR descriptions)
 
 ---
 
